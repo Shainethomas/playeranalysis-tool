@@ -44,15 +44,3 @@ python -m http.server 8000
 
 None required for the static experience.
 
-## Deployment
-
-This repo is structured as a static site. Deploy the repository root to Vercel or Netlify after generating the `data/` folder.
-
-### Vercel CLI flow
-
-```bash
-npx vercel login
-npx vercel --yes
-```
-
-The local deployment attempt from this environment reached Vercel successfully, but failed on an invalid CLI token, so a fresh `vercel login` is still required before a live URL can be attached.
