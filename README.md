@@ -44,3 +44,8 @@ python -m http.server 8000
 
 None required for the static experience.
 
+
+## deployed url in vercel
+
+https://playeranalysis-tool.vercel.app/
+
