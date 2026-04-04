@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LILA BLACK Player Journey Explorer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <p class="eyebrow">LILA BLACK</p>
+          <h1>Interactive Match Replay</h1>
+          <p class="subtle">
+            Replay a match, inspect movement over time, compare humans and bots, and reveal the zones that matter for level design.
+          </p>
+        </div>
+
+        <section class="panel pitch-panel">
+          <h2>Core Idea</h2>
+          <p class="pitch-line">
+            A match replay plus spatial analytics tool that helps level designers inspect real player behavior on real maps.
+          </p>
+          <div class="flow-steps">
+            <span>Select map</span>
+            <span>Pick match</span>
+            <span>Press play</span>
+            <span>Toggle heatmaps</span>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Filters</h2>
+          <label>
+            <span>Map</span>
+            <select id="mapFilter"></select>
+          </label>
+          <label>
+            <span>Session Date</span>
+            <select id="dateFilter"></select>
+          </label>
+          <label>
+            <span>Replay</span>
+            <select id="matchFilter"></select>
+          </label>
+          <p class="filter-note">Replay options update from the selected map and date.</p>
+          <div class="stats-grid" id="summaryCards"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Replay Controls</h2>
+          <div class="timeline-controls">
+            <button id="playPauseBtn" type="button">Play</button>
+            <label>
+              <span>Speed</span>
+              <select id="speedSelect">
+                <option value="0.5">0.5x</option>
+                <option value="1" selected>1x</option>
+                <option value="2">2x</option>
+                <option value="4">4x</option>
+              </select>
+            </label>
+          </div>
+          <input id="timelineSlider" type="range" min="0" max="1000" step="1" value="0" />
+          <div class="timeline-readout">
+            <strong id="timeLabel">00:00.000</strong>
+            <span id="matchMeta"></span>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Spatial Layers</h2>
+          <label>
+            <span>Heatmap</span>
+            <select id="heatmapMode">
+              <option value="none">None</option>
+              <option value="traffic">High Traffic</option>
+              <option value="kills">Kill Zones</option>
+              <option value="deaths">Death Zones</option>
+              <option value="loot">Loot Density</option>
+              <option value="storm">Storm Deaths</option>
+            </select>
+          </label>
+          <div class="check-row">
+            <label><input id="showHumans" type="checkbox" checked /> Humans</label>
+            <label><input id="showBots" type="checkbox" checked /> Bots</label>
+          </div>
+          <div class="check-column">
+            <label><input class="event-toggle" data-event="Loot" type="checkbox" checked /> Loot</label>
+            <label><input class="event-toggle" data-event="Kill" type="checkbox" checked /> Kill</label>
+            <label><input class="event-toggle" data-event="Killed" type="checkbox" checked /> Death</label>
+            <label><input class="event-toggle" data-event="BotKill" type="checkbox" checked /> Bot Kill</label>
+            <label><input class="event-toggle" data-event="BotKilled" type="checkbox" checked /> Bot Death</label>
+            <label><input class="event-toggle" data-event="KilledByStorm" type="checkbox" checked /> Storm Death</label>
+          </div>
+        </section>
+
+        <section class="panel legend">
+          <h2>Legend</h2>
+          <div class="legend-item"><span class="swatch human"></span> Human path</div>
+          <div class="legend-item"><span class="swatch bot"></span> Bot path</div>
+          <div class="legend-item"><span class="swatch loot"></span> Loot</div>
+          <div class="legend-item"><span class="swatch kill"></span> Kill</div>
+          <div class="legend-item"><span class="swatch death"></span> Death</div>
+          <div class="legend-item"><span class="swatch storm"></span> Storm death</div>
+        </section>
+      </aside>
+
+      <main class="stage">
+        <div class="stage-topbar">
+          <div>
+            <p class="eyebrow">Match Replay + Analytics</p>
+            <h2 id="mapTitle">Loading map...</h2>
+          </div>
+          <div class="hint">Use replay to study sequence, then switch to heatmaps to answer where players move, fight, loot, and die.</div>
+        </div>
+        <div class="stage-metrics" id="stageMetrics"></div>
+
+        <div class="map-wrap">
+          <div class="map-stack">
+            <img id="mapImage" class="map-image" alt="Minimap" />
+            <canvas id="heatmapCanvas" width="1024" height="1024"></canvas>
+            <canvas id="overlayCanvas" width="1024" height="1024"></canvas>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="app-v2.js"></script>
+  </body>
+  </html>
