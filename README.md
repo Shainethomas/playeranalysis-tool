@@ -1,4 +1,4 @@
-# LILA BLACK Player Journey Explorer
+# Player Journey Explorer
 
 Browser-based visualization tool for exploring player telemetry across the three LILA BLACK maps.
 
